@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+<com.youth.banner.Banner
+    android:id="@+id/rollImg_banner"
+    android:layout_width="match_parent"
+    android:layout_height="170dp">
+</com.youth.banner.Banner>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/guideFirstFm_rv"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <com.example.dllo.mybeaufulproject.tool.GuideNoListView
+        android:id="@+id/guide_no_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.example.dllo.mybeaufulproject.tool.GuideNoListView>
+
+    </LinearLayout>
+</ScrollView>
+</LinearLayout>
