@@ -2,23 +2,29 @@ package com.example.dllo.mybeaufulproject.model.net;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.dllo.mybeaufulproject.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 /**
  * Created by dllo on 16/7/12.
+ * 这里是我的单例
  */
 public class VolleyInstance {
     //定义一个请求队列
     private RequestQueue queue;
     //定义一个当前类的静态对象
     private static VolleyInstance instance;
+
 
     //私有化构造方法
     private VolleyInstance(Context context){
@@ -75,5 +81,15 @@ public class VolleyInstance {
         queue.add(sr);
     }
 
+     // UniversalImageloader 解析图片
+    public static DisplayImageOptions options = new DisplayImageOptions.Builder().
+             cacheInMemory(true).cacheInMemory(true).
+             showImageForEmptyUri(R.mipmap.icon_progress_bar_refresh).
+             showImageOnFail(R.mipmap.icon_progress_bar_refresh).build();
 
+    public static void loaderImage(String url, ImageView imageView,Context context){
+        ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(context);
+        ImageLoader.getInstance().init(configuration);
+        ImageLoader.getInstance().displayImage(url,imageView,options);
+    }
 }

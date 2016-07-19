@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/7/13.
+ * 这里是首页rv的解析类
  */
 public class GuideFristRvBeam {
 

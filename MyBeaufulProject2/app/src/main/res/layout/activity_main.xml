@@ -24,23 +24,35 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:drawableTop="@drawable/guidebtn_state"
-            android:checked="true"
-            android:layout_marginLeft="20dp"
-            android:drawablePadding="5dp"
-            android:textColor="@color/color_radiobutton"
             android:id="@+id/guide_radioButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:button="@null"
+            android:drawableTop="@drawable/guidebtn_state"
             android:gravity="center"
-            android:text="@string/guide_text" />
+            android:checked="true"
+            android:text="指南"
+            android:textColor="@color/color_radiobutton"
+            android:textSize="10sp"
+
+
+
+
+
+
+
+
+
+
+             />
 
 
         <RadioButton
+            android:layout_margin="5dp"
             android:textColor="@color/color_radiobutton"
-            android:drawablePadding="5dp"
+
             android:drawableTop="@drawable/my_state"
             android:gravity="center"
             android:text="@string/hot_text"
@@ -48,11 +60,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:textSize="10sp"
             android:button="@null" />
 
         <RadioButton
+            android:layout_margin="5dp"
             android:textColor="@color/color_radiobutton"
-            android:drawablePadding="5dp"
+
             android:drawableTop="@drawable/hotbtn_state"
             android:id="@+id/classify_radioButton"
             android:layout_width="0dp"
@@ -60,9 +74,11 @@
             android:layout_weight="1"
             android:text="@string/classFiy_text"
             android:gravity="center"
+            android:textSize="10sp"
             android:button="@null" />
 
         <RadioButton
+            android:layout_margin="5dp"
             android:textColor="@color/color_radiobutton"
             android:drawableTop="@drawable/classify_state"
             android:id="@+id/my_radioButton"
@@ -70,6 +86,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/my_text"
+            android:textSize="10sp"
             android:gravity="center"
             android:button="@null" />
     </RadioGroup>

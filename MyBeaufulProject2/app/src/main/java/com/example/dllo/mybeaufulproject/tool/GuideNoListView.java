@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 /**
  * Created by wubihang on 16/7/13.
+ * 自定义的Listview
  */
 public class GuideNoListView extends ListView {
     public GuideNoListView(Context context) {

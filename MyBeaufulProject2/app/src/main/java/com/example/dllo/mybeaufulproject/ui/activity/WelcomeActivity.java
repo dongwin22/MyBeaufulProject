@@ -8,6 +8,7 @@ import com.example.dllo.mybeaufulproject.R;
 
 /**
  * Created by dllo on 16/7/12.
+ * 这里是欢迎页的Activity
  */
 public class WelcomeActivity extends AbsBaseActivity implements View.OnClickListener {
     private ImageView imageView;

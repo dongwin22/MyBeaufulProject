@@ -1,16 +1,19 @@
 package com.example.dllo.mybeaufulproject.ui.activity;
 
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.ImageButton;
+import android.widget.Toast;
+
 
 import com.example.dllo.mybeaufulproject.R;
-import com.example.dllo.mybeaufulproject.ui.fragment.GuideFragment;
+
 
 /**
  * Created by dllo on 16/7/13.
+ * 这里是登录首页的Activity
  */
 public class LoginActivity extends AbsBaseActivity implements View.OnClickListener {
-    private ImageView imageViewX;
+    private ImageButton imagebtn_X;
     @Override
     protected int setLayout() {
         return R.layout.login_activity;
@@ -18,7 +21,7 @@ public class LoginActivity extends AbsBaseActivity implements View.OnClickListen
 
     @Override
     protected void initViews() {
-        imageViewX = ByView(R.id.btn_loginClose);
+        imagebtn_X = ByView(R.id.btn_loginClose);
 
     }
 
@@ -29,11 +32,21 @@ public class LoginActivity extends AbsBaseActivity implements View.OnClickListen
 
     @Override
     protected void setListeners() {
-        imageViewX.setOnClickListener(this);
-    }
+
+        imagebtn_X.setOnClickListener(this);
+
+
+
+}
 
     @Override
     public void onClick(View v) {
-        goTo(LoginActivity.this,MainActivity.class);
+        switch (v.getId()){
+            case R.id.btn_loginClose:
+                goTo(this,MainActivity.class);
+                break;
+        }
+
+
     }
 }

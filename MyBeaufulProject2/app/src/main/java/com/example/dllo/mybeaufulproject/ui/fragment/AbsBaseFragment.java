@@ -13,6 +13,7 @@ import com.example.dllo.mybeaufulproject.ui.activity.AbsBaseActivity;
 
 /**
  * Created by dllo on 16/7/11.
+ * 这里是Fragment的基类
  */
 public abstract class AbsBaseFragment extends Fragment{
 
@@ -79,5 +80,11 @@ public abstract class AbsBaseFragment extends Fragment{
         Intent intent = new Intent(from,to);
         context.startActivity(intent);
     }
-
+    //带球进门
+    protected void goTo(Context from,Class<? extends AbsBaseActivity> to,Bundle values){
+        Intent intent = new Intent(from,to);
+        // 传值们 打包一起传值用的
+        intent.putExtras(values);
+        startActivity(intent);
+    }
 }

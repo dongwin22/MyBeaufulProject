@@ -14,11 +14,17 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/7/13.
+ * 这里是首页精品的适配器
  */
-public class GuideFirstFmAdapter extends RecyclerView.Adapter<GuideFirstFmAdapter.GdFmRvHolder>{
+public class GuideFirstFmAdapter extends RecyclerView.Adapter<GuideFirstFmAdapter.GdFmRvHolder> {
     private List<String> imageUrls;
     private Context context;
     private GdFmRvHolder holder;
+    private GdFmRvOnClick gdFmRvOnClick;
+
+    public void setGdFmRvOnClick(GdFmRvOnClick gdFmRvOnClick) {
+        this.gdFmRvOnClick = gdFmRvOnClick;
+    }
 
     public GuideFirstFmAdapter(Context context) {
         this.context = context;
@@ -37,8 +43,18 @@ public class GuideFirstFmAdapter extends RecyclerView.Adapter<GuideFirstFmAdapte
     }
 
     @Override
-    public void onBindViewHolder(GdFmRvHolder holder, int position) {
+    public void onBindViewHolder(final GdFmRvHolder holder, int position) {
         Picasso.with(context).load(imageUrls.get(position)).into(holder.imageView);
+        if (gdFmRvOnClick != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getAdapterPosition();
+                    gdFmRvOnClick.onClickListener(pos);
+                }
+            });
+
+        }
     }
 
     @Override
@@ -46,6 +62,12 @@ public class GuideFirstFmAdapter extends RecyclerView.Adapter<GuideFirstFmAdapte
         return imageUrls.size() != 0 ? imageUrls.size() : 0 ;
     }
 
+//    //对Rv添加监听事件
+//    @Override
+//    public void onClick(View v) {
+//        int pos = holder.getAdapterPosition();
+//        gdFmRvOnClick.onClickListener(pos);
+//    }
 
 
     class GdFmRvHolder extends RecyclerView.ViewHolder{

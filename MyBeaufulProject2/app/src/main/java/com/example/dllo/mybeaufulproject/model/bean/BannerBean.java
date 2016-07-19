@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/7/12.
+ * 这里是首页轮播图的解析类
  */
 public class BannerBean {
 

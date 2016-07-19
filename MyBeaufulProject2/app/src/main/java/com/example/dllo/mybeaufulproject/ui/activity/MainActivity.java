@@ -22,6 +22,9 @@ public class MainActivity extends AbsBaseActivity implements RadioGroup.OnChecke
 
     private RadioGroup main_radioGroup;
     private GuideFragment guideFragment;
+    private HotFragment hotFragment;
+    private ClassifyFragment classifyFragment;
+    private MyFragment myFragment;
 
     @Override
     protected int setLayout() {
@@ -33,7 +36,11 @@ public class MainActivity extends AbsBaseActivity implements RadioGroup.OnChecke
         main_radioGroup = ByView(R.id.main_radioGroup);
 
         guideFragment = new GuideFragment();
+        hotFragment = new HotFragment();
+        classifyFragment = new ClassifyFragment();
+        myFragment = new MyFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frameLayout,guideFragment).commit();
+
 
     }
 
@@ -59,13 +66,13 @@ public class MainActivity extends AbsBaseActivity implements RadioGroup.OnChecke
                 fragmentTransaction.replace(R.id.main_frameLayout,guideFragment);
                 break;
             case R.id.hot_radioButton:
-                fragmentTransaction.replace(R.id.main_frameLayout,new HotFragment());
+                fragmentTransaction.replace(R.id.main_frameLayout,hotFragment);
                 break;
             case R.id.classify_radioButton:
-                fragmentTransaction.replace(R.id.main_frameLayout,new ClassifyFragment());
+                fragmentTransaction.replace(R.id.main_frameLayout,classifyFragment);
                 break;
             case R.id.my_radioButton:
-                fragmentTransaction.replace(R.id.main_frameLayout,new MyFragment());
+                fragmentTransaction.replace(R.id.main_frameLayout,myFragment);
         }
         fragmentTransaction.commit();
     }

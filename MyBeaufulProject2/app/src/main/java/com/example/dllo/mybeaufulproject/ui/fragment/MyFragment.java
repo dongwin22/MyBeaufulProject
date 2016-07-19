@@ -4,6 +4,7 @@ import com.example.dllo.mybeaufulproject.R;
 
 /**
  * Created by dllo on 16/7/11.
+ * 这里是我的Fragment
  */
 public class MyFragment extends AbsBaseFragment{
     @Override

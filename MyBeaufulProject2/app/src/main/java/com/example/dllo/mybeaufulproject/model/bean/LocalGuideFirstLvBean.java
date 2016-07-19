@@ -2,6 +2,7 @@ package com.example.dllo.mybeaufulproject.model.bean;
 
 /**
  * Created by dllo on 16/7/13.
+ * 首页的内部类
  */
 public class LocalGuideFirstLvBean {
     String title,likesCount,imageUrl;

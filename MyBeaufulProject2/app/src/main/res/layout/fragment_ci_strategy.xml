@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/ciFmColumn_Tv"
+            android:text="栏目"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/ciFmexamine_Tv"
+            android:layout_marginLeft="260dp"
+            android:text="查看全部>"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ciFmStrategy_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <!--classGv-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ciGvClass_Tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="品类"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/ciGvClassAll_Tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="260dp"
+                        android:text="查看全部>"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <GridView
+                    android:id="@+id/ciStrategyClassGv"
+                    android:layout_width="match_parent"
+                    android:numColumns="2"
+                    android:layout_height="280dp" />
+            </LinearLayout>
+            <!--styleGv-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ciGvStyle_Tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="品类"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/ciGvStyleAll_Tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="260dp"
+                        android:text="查看全部>"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <GridView
+                    android:id="@+id/ciStrategyStyleGv"
+                    android:layout_width="match_parent"
+                    android:numColumns="2"
+                    android:layout_height="280dp" />
+            </LinearLayout>
+            <!--peopleGv-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ciGvPeople_Tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="品类"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/ciGvPeopleAll_Tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="260dp"
+                        android:text="查看全部>"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <GridView
+                    android:id="@+id/ciStrategyPeopleGv"
+                    android:layout_width="match_parent"
+                    android:numColumns="2"
+                    android:layout_height="280dp" />
+            </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

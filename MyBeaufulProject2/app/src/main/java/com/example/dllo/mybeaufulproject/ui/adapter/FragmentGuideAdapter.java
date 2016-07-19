@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 /**
  * Created by dllo on 16/7/12.
+ * 这里是第一页首页的适配器
  */
 public class FragmentGuideAdapter extends FragmentPagerAdapter{
     private ArrayList<String> title;

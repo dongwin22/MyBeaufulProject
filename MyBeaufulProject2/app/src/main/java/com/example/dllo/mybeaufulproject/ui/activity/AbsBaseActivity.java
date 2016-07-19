@@ -10,6 +10,7 @@ import android.view.WindowManager;
 
 /**
  * Created by dllo on 16/7/11.
+ * 这里是Activity的基类
  */
 public abstract class AbsBaseActivity extends AppCompatActivity{
 
@@ -28,6 +29,7 @@ public abstract class AbsBaseActivity extends AppCompatActivity{
         initViews();
         // 2.初始化数据
         initDatas();
+        setListeners();
     }
 
     /**
@@ -66,6 +68,7 @@ public abstract class AbsBaseActivity extends AppCompatActivity{
     protected void  goTo(Context from, Class<? extends AbsBaseActivity> to){
         Intent intent = new Intent(from,to);
         startActivity(intent);
+
     }
 
     /**

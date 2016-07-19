@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-<TextView
-    android:text="复用的"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
-</LinearLayout>
+
+        <ListView
+            android:id="@+id/guide_reuse_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
