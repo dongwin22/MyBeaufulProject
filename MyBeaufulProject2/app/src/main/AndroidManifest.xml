@@ -19,6 +19,8 @@
         <activity android:name=".ui.activity.MainActivity"/>
         <activity android:name=".ui.activity.LoginActivity"/>
         <activity android:name=".ui.activity.SecondaryJumpActivity"/>
+        <activity android:name=".ui.activity.JumpWebActivity"/>
+        <activity android:name=".ui.activity.JumpbabyDatailsActivity"/>
     </application>
 
 </manifest>

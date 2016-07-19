@@ -4,7 +4,9 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -17,6 +19,7 @@ import com.example.dllo.mybeaufulproject.model.bean.LocalGuideFirstLvBean;
 import com.example.dllo.mybeaufulproject.model.net.RunnableDocumentBean;
 import com.example.dllo.mybeaufulproject.model.net.VolleyInstance;
 import com.example.dllo.mybeaufulproject.model.net.VolleyPort;
+import com.example.dllo.mybeaufulproject.ui.activity.JumpWebActivity;
 import com.example.dllo.mybeaufulproject.ui.activity.LoginActivity;
 import com.example.dllo.mybeaufulproject.ui.activity.MainActivity;
 import com.example.dllo.mybeaufulproject.ui.activity.SecondaryJumpActivity;
@@ -35,7 +38,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by dllo on 16/7/12.
  * 这里是第一页精品的fragment
  */
-public class GdFristFragment extends AbsBaseFragment implements VolleyPort, Banner.OnBannerClickListener, GdFmRvOnClick {
+public class GdFristFragment extends AbsBaseFragment implements VolleyPort, Banner.OnBannerClickListener, GdFmRvOnClick, AdapterView.OnItemClickListener {
     //设置一个状态 区分网络对象
     private int type;
     private List<String> rvUrlArray;//装rvUrl的集合
@@ -48,7 +51,6 @@ public class GdFristFragment extends AbsBaseFragment implements VolleyPort, Bann
     // 初始化recyleView接口
     private String rvUrl = RunnableDocumentBean.GD_FIRST_RV_URL;
     private String lvUrl = RunnableDocumentBean.GD_FIRST_LV_URL;
-    private List<LocalGuideFirstLvBean> lvBeanArray;
     private ListView guideFirstFmLv;
 
 
@@ -58,6 +60,7 @@ public class GdFristFragment extends AbsBaseFragment implements VolleyPort, Bann
     private  String[] bannerJupUrls;
     private String[] titles;
     private Gson gson;
+    private GuideFirstLvBean lvBean;
 
     @Override
     protected int setLayout() {
@@ -77,6 +80,8 @@ public class GdFristFragment extends AbsBaseFragment implements VolleyPort, Bann
         type = 0;
         VolleyInstance.getInstance(context).stratStringRequest(bannersUrl,this);
 
+        // 给Listview加点击事件
+        guideFirstFmLv.setOnItemClickListener(this);
 
 
 
@@ -125,15 +130,9 @@ public class GdFristFragment extends AbsBaseFragment implements VolleyPort, Bann
                 break;
             case 1:
                 GuideFristRvBeam rvBean = gson.fromJson(str,GuideFristRvBeam.class);
-                List<GuideFristRvBeam.DataBean.SecondaryBannersBean> rvData = rvBean.getData().getSecondary_banners();
-                rvUrlArray = new ArrayList<>();
-                for (int i = 0; i < rvData.size(); i++) {
-                    String url = rvData.get(i).getImage_url();
-                    rvUrlArray.add(url);
-                }
-                // 初始化适配器
+
                 guideFirstFmAdapter = new GuideFirstFmAdapter(context);
-                guideFirstFmAdapter.setImageUrls(rvUrlArray);
+                guideFirstFmAdapter.setRvBeam(rvBean);
                 guideFirstFmRv.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
                 guideFirstFmRv.setAdapter(guideFirstFmAdapter);
                 guideFirstFmAdapter.setGdFmRvOnClick(this);
@@ -144,18 +143,10 @@ public class GdFristFragment extends AbsBaseFragment implements VolleyPort, Bann
             case 2:
                 // 解析lv数据
                 gson = new Gson();
-                GuideFirstLvBean lvBean = gson.fromJson(str,GuideFirstLvBean.class);
-                List<GuideFirstLvBean.DataBean.ItemsBean> lvData = lvBean.getData().getItems();
-                lvBeanArray = new ArrayList<>();
-                for (int i = 0; i < lvData.size(); i++) {
+                lvBean = gson.fromJson(str,GuideFirstLvBean.class);
 
-                    LocalGuideFirstLvBean localGuideFirstLvBean = new LocalGuideFirstLvBean();
-                    localGuideFirstLvBean.setImageUrl(lvData.get(i).getCover_image_url()).setTitle(lvData.get(i)
-                            .getTitle()).setLikesCount(String.valueOf(lvData.get(i).getLikes_count()));
-                    lvBeanArray.add(localGuideFirstLvBean);
-                }
                 guideFirstLvAdapter = new GuideFirstLvAdapter(context);
-                guideFirstLvAdapter.setDatas(lvBeanArray);
+                guideFirstLvAdapter.setDatas(lvBean);
                 guideFirstFmLv.setAdapter(guideFirstLvAdapter);
                 break;
         }
@@ -183,5 +174,19 @@ public class GdFristFragment extends AbsBaseFragment implements VolleyPort, Bann
     @Override
     public void onClickListener(int pos) {
         Toast.makeText(context, "啦啦啦", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * listview的点击事件
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Bundle bundle = new Bundle();
+        bundle.putString("url",lvBean.getData().getItems().get(position).getUrl());
+        goTo(context, JumpWebActivity.class,bundle);
     }
 }

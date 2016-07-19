@@ -24,26 +24,26 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * 这里是复用fragment里面Listview的适配器
  */
 public class GuideReuseFmLvAdapter extends BaseAdapter {
-    private List<LocalGuideReuseLvBean> datas;
+    private GuideReuseBean datas;
     private Context context;
 
     public GuideReuseFmLvAdapter(Context context) {
         this.context = context;
     }
 
-    public void setDatas(List<LocalGuideReuseLvBean> datas) {
+    public void setDatas(GuideReuseBean datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return datas != null ? datas.size() : 0;
+        return datas != null ? datas.getData().getItems().size(): 0;
     }
 
     @Override
     public Object getItem(int position) {
-        return datas != null ? datas.get(position) : null;
+        return datas != null ? datas.getData().getItems().get(position): null;
     }
 
     @Override
@@ -61,14 +61,13 @@ public class GuideReuseFmLvAdapter extends BaseAdapter {
         } else {
             holder = (GuiReuseFmLvHolder) convertView.getTag();
         }
-        LocalGuideReuseLvBean bean = datas.get(position);
-        holder.categoryTv.setText(bean.getCategory());
-        holder.nikeNameTv.setText(bean.getNickName());
-        holder.shortTitleTv.setText(bean.getShortTitle());
-        holder.titleTv.setText(bean.getTitle());
-        holder.likesCountTv.setText(bean.getLikesCount());
-        VolleyInstance.loaderImage(bean.getAvatarUrl(), holder.avatarIv, context);
-        VolleyInstance.loaderImage(bean.getImageUrl(), holder.coverImageIv, context);
+        holder.nikeNameTv.setText(datas.getData().getItems().get(position).getAuthor().getNickname());
+        holder.categoryTv.setText(datas.getData().getItems().get(position).getColumn().getCategory());
+        holder.shortTitleTv.setText(datas.getData().getItems().get(position).getColumn().getTitle());
+        holder.titleTv.setText(datas.getData().getItems().get(position).getTitle());
+        holder.likesCountTv.setText(String.valueOf(datas.getData().getItems().get(position).getLikes_count()));
+        VolleyInstance.loaderImage(datas.getData().getItems().get(position).getAuthor().getAvatar_url(),holder.avatarIv,context);
+        VolleyInstance.loaderImage(datas.getData().getItems().get(position).getCover_image_url(),holder.coverImageIv,context);
         return convertView;
     }
 

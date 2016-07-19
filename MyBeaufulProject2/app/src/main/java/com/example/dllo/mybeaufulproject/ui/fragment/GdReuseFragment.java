@@ -1,6 +1,8 @@
 package com.example.dllo.mybeaufulproject.ui.fragment;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.dllo.mybeaufulproject.R;
@@ -8,6 +10,7 @@ import com.example.dllo.mybeaufulproject.model.bean.GuideReuseBean;
 import com.example.dllo.mybeaufulproject.model.bean.LocalGuideReuseLvBean;
 import com.example.dllo.mybeaufulproject.model.net.VolleyInstance;
 import com.example.dllo.mybeaufulproject.model.net.VolleyPort;
+import com.example.dllo.mybeaufulproject.ui.activity.JumpWebActivity;
 import com.example.dllo.mybeaufulproject.ui.adapter.GuideReuseFmLvAdapter;
 import com.google.gson.Gson;
 
@@ -18,12 +21,13 @@ import java.util.List;
  * Created by dllo on 16/7/12.
  * 这里是复用(第一页)fragment
  */
-public class GdReuseFragment extends AbsBaseFragment implements VolleyPort {
+public class GdReuseFragment extends AbsBaseFragment implements VolleyPort, AdapterView.OnItemClickListener {
     private String reuseUrl;
     //初始化集合
-    List<LocalGuideReuseLvBean> localGuideReuseLvBeenArray;
+    private GuideReuseBean GuideReuseBeenArray;
     private GuideReuseFmLvAdapter lvAdapter;
     private ListView gdReuseListView;
+    private GuideReuseBean guideReuseBean;
 
     // 对外提供一个静态的 返回fragment对象的方法
     public static GdReuseFragment getReuseFragments(String url){
@@ -51,28 +55,20 @@ public class GdReuseFragment extends AbsBaseFragment implements VolleyPort {
         Bundle bundle = getArguments();
         this.reuseUrl = bundle.getString("url");
         VolleyInstance.getInstance(context).stratStringRequest(reuseUrl,this);
+        //listview监听
+        gdReuseListView.setOnItemClickListener(this);
+
 
     }
 
     @Override
     public void stringSuccess(String str) {
         Gson gson = new Gson();
-        GuideReuseBean guideReuseBean = gson.fromJson(str,GuideReuseBean.class);
-        List<GuideReuseBean.DataBean.ItemsBean> lvData = guideReuseBean.getData().getItems();
-        localGuideReuseLvBeenArray = new ArrayList<>();
-        for (int i = 0; i < lvData.size(); i++) {
-            LocalGuideReuseLvBean bean = new LocalGuideReuseLvBean();
-            bean.setLikesCount(String.valueOf(lvData.get(i).getLikes_count())).
-                    setTitle(lvData.get(i).getTitle()).
-                    setImageUrl(lvData.get(i).getCover_image_url()).
-                    setNickName(lvData.get(i).getAuthor().getNickname()).
-                    setAvatarUrl(lvData.get(i).getAuthor().getAvatar_url()).
-                    setShortTitle(lvData.get(i).getColumn().getTitle()).
-                    setCategory(lvData.get(i).getColumn().getCategory());
-            localGuideReuseLvBeenArray.add(bean);
-        }
+        guideReuseBean = gson.fromJson(str,GuideReuseBean.class);
+
+
         lvAdapter = new GuideReuseFmLvAdapter(context);
-        lvAdapter.setDatas(localGuideReuseLvBeenArray);
+        lvAdapter.setDatas(guideReuseBean);
         gdReuseListView.setAdapter(lvAdapter);
 
     }
@@ -80,5 +76,13 @@ public class GdReuseFragment extends AbsBaseFragment implements VolleyPort {
     @Override
     public void stringFailure() {
 
+    }
+    // 监听回调listview
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        //获取接口复用的跳转
+        Bundle bundle = new Bundle();
+        bundle.putString("url",guideReuseBean.getData().getItems().get(position).getUrl());
+        goTo(context, JumpWebActivity.class,bundle);
     }
 }

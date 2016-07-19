@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.dllo.mybeaufulproject.R;
+import com.example.dllo.mybeaufulproject.model.bean.GuideFristRvBeam;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
  * 这里是首页精品的适配器
  */
 public class GuideFirstFmAdapter extends RecyclerView.Adapter<GuideFirstFmAdapter.GdFmRvHolder> {
-    private List<String> imageUrls;
+    private GuideFristRvBeam rvBeam;
     private Context context;
     private GdFmRvHolder holder;
     private GdFmRvOnClick gdFmRvOnClick;
@@ -30,8 +31,8 @@ public class GuideFirstFmAdapter extends RecyclerView.Adapter<GuideFirstFmAdapte
         this.context = context;
     }
 
-    public void setImageUrls(List<String> imageUrls) {
-        this.imageUrls = imageUrls;
+    public void setRvBeam(GuideFristRvBeam rvBeam) {
+        this.rvBeam = rvBeam;
         notifyDataSetChanged();
     }
 
@@ -44,7 +45,7 @@ public class GuideFirstFmAdapter extends RecyclerView.Adapter<GuideFirstFmAdapte
 
     @Override
     public void onBindViewHolder(final GdFmRvHolder holder, int position) {
-        Picasso.with(context).load(imageUrls.get(position)).into(holder.imageView);
+        Picasso.with(context).load(rvBeam.getData().getSecondary_banners().get(position).getImage_url()).into(holder.imageView);
         if (gdFmRvOnClick != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -59,7 +60,7 @@ public class GuideFirstFmAdapter extends RecyclerView.Adapter<GuideFirstFmAdapte
 
     @Override
     public int getItemCount() {
-        return imageUrls.size() != 0 ? imageUrls.size() : 0 ;
+        return rvBeam !=null ? rvBeam.getData().getSecondary_banners().size():0;
     }
 
 //    //对Rv添加监听事件

@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.dllo.mybeaufulproject.R;
+import com.example.dllo.mybeaufulproject.model.bean.GuideFirstLvBean;
 import com.example.dllo.mybeaufulproject.model.bean.LocalGuideFirstLvBean;
 import com.squareup.picasso.Picasso;
 
@@ -20,26 +21,26 @@ import java.util.List;
  * 这里是首页精品里面listview的适配器
  */
 public class GuideFirstLvAdapter extends BaseAdapter{
-    private List<LocalGuideFirstLvBean> datas;
+    private GuideFirstLvBean datas;
     private Context context;
 
     public GuideFirstLvAdapter(Context context) {
         this.context = context;
     }
 
-    public void setDatas(List<LocalGuideFirstLvBean> datas) {
+    public void setDatas(GuideFirstLvBean datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return datas != null ? datas.size() :0 ;
+        return datas != null ? datas.getData().getItems().size():0 ;
     }
 
     @Override
     public Object getItem(int position) {
-        return datas != null ? datas.get(position):null;
+        return datas != null ? datas.getData().getItems().get(position):null;
     }
 
     @Override
@@ -57,10 +58,9 @@ public class GuideFirstLvAdapter extends BaseAdapter{
         }else{
             lvHolder = (GuideFirstFmHolder) convertView.getTag();
         }
-        LocalGuideFirstLvBean lvBean = datas.get(position);
-        lvHolder.titleTv.setText(lvBean.getTitle());
-        lvHolder.likesCountTv.setText(lvBean.getLikesCount());
-        Picasso.with(context).load(lvBean.getImageUrl()).into(lvHolder.coverIv);
+        lvHolder.titleTv.setText(datas.getData().getItems().get(position).getTitle());
+        lvHolder.likesCountTv.setText(String.valueOf(datas.getData().getItems().get(position).getLikes_count()));
+        Picasso.with(context).load(datas.getData().getItems().get(position).getCover_image_url()).into(lvHolder.coverIv);
         return convertView;
     }
     class GuideFirstFmHolder{

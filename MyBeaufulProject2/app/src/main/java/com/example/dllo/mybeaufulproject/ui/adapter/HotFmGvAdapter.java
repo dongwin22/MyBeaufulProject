@@ -23,26 +23,26 @@ import java.util.List;
  * 这里为热门的适配器
  */
 public class HotFmGvAdapter extends BaseAdapter {
-    private List<LocalHotFmGvBean> datas;
+    private HotFmGvBean datas;
     private Context context;
 
     public HotFmGvAdapter(Context context) {
         this.context = context;
     }
 
-    public void setDatas(List<LocalHotFmGvBean> datas) {
+    public void setDatas(HotFmGvBean datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return datas != null ? datas.size() : 0;
+        return datas != null ? datas.getData().getItems().size(): 0;
     }
 
     @Override
     public Object getItem(int position) {
-        return datas != null ? datas.get(position) : null;
+        return datas != null ? datas.getData().getItems().get(position): null;
     }
 
     @Override
@@ -60,11 +60,10 @@ public class HotFmGvAdapter extends BaseAdapter {
         } else {
             holder = (HotFmGvHolder) convertView.getTag();
         }
-        LocalHotFmGvBean bean = datas.get(position);
-        holder.nameTv.setText(bean.getName());
-        holder.priceTv.setText(bean.getPrice());
-        holder.likesCountTv.setText(bean.getLikesCount());
-        VolleyInstance.getInstance(context).loaderImage(bean.getImageUrl(), holder.coverImgIv, context);
+        holder.nameTv.setText(datas.getData().getItems().get(position).getData().getName());
+        holder.priceTv.setText(String.valueOf(datas.getData().getItems().get(position).getData().getPrice()));
+        holder.likesCountTv.setText(String.valueOf(datas.getData().getItems().get(position).getData().getFavorites_count()));
+        VolleyInstance.getInstance(context).loaderImage(datas.getData().getItems().get(position).getData().getCover_image_url(),holder.coverImgIv,context);
         return convertView;
     }
 
